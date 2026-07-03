@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XTFF4X | Dark X Streamer Panels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { background: #0b0e14; display: flex; justify-content: center; padding: 20px; min-height: 100vh; }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: linear-gradient(145deg, #141a24, #0e121b);
+            border-radius: 30px;
+            padding: 30px 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .main-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 20px;
+        }
+        .main-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00f5d4, #00b894);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .main-header p { color: #8a9bb5; letter-spacing: 1px; }
+        .main-header p span { color: #ffb347; background: rgba(255,179,71,0.1); padding: 2px 15px; border-radius: 20px; }
+
+        .panel-section {
+            background: rgba(255,255,255,0.02);
+            border-radius: 24px;
+            padding: 25px 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,255,255,0.05);
+        }
+        .section-header i { font-size: 1.8rem; }
+        .section-header h2 { color: #fff; font-size: 1.6rem; font-weight: 700; }
+        .badge-root {
+            background: rgba(255,255,255,0.06);
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            color: #aabbd5;
+            text-transform: uppercase;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .theme-cyan .section-header i { color: #00f5d4; }
+        .theme-cyan .section-header h2 { color: #00f5d4; }
+        .theme-cyan .btn-buy { background: linear-gradient(135deg, #00f5d4, #00b894); color: #0b0e14; }
+        .theme-orange .section-header i { color: #ffb347; }
+        .theme-orange .section-header h2 { color: #ffb347; }
+        .theme-orange .btn-buy { background: linear-gradient(135deg, #ffb347, #f57c00); color: #0b0e14; }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 15px;
+        }
+        .pricing-card {
+            background: rgba(0,0,0,0.3);
+            border-radius: 18px;
+            padding: 20px 12px 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+        .pricing-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.15); }
+        .duration { color: #aabbd5; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .price { font-size: 2.2rem; font-weight: 800; color: #ffffff; margin: 8px 0; }
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.06);
+            color: #aabbd5;
+            font-size: 0.65rem;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .btn-buy {
+            width: 100%;
+            padding: 12px 0;
+            border: none;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            letter-spacing: 0.5px;
+            color: #0b0e14;
+        }
+        .btn-buy:hover { transform: scale(1.02); filter: brightness(1.15); }
+        .btn-buy i { margin-right: 6px; }
+
+        .apk-download-link {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 60px;
+            padding: 8px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #aabbd5;
+            text-decoration: none;
+            transition: 0.3s;
+            backdrop-filter: blur(4px);
+        }
+        .apk-download-link:hover {
+            background: rgba(0, 245, 212, 0.12);
+            border-color: rgba(0, 245, 212, 0.4);
+            color: #00f5d4;
+        }
+        .apk-download-link i { font-size: 0.85rem; }
+
+        .footer { text-align: center; margin-top: 25px; color: #3d4a5e; font-size: 0.75rem; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 20px; }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.88);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-box {
+            background: #1a222e;
+            max-width: 440px;
+            width: 100%;
+            border-radius: 30px;
+            padding: 35px 30px;
+            border: 1px solid rgba(255,255,255,0.08);
+            animation: modalFade 0.3s ease;
+        }
+        @keyframes modalFade { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .modal-box .close-btn { float: right; background: none; border: none; color: #8a9bb5; font-size: 1.8rem; cursor: pointer; }
+        .modal-box .close-btn:hover { color: #fff; transform: rotate(90deg); }
+        .modal-box h2 { color: #fff; margin-top: 5px; }
+        .selected-panel-name {
+            color: #00f5d4;
+            font-weight: 700;
+            background: rgba(0,0,0,0.3);
+            padding: 4px 14px;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 5px 0 10px;
+        }
+        .upi-id-box {
+            background: #0b0e14;
+            padding: 18px;
+            border-radius: 16px;
+            margin: 18px 0;
+            border: 2px dashed rgba(0,245,212,0.2);
+            text-align: center;
+        }
+        .upi-label { color: #8a9bb5; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
+        .upi-value { font-size: 1.7rem; font-weight: 700; color: #00f5d4; word-break: break-all; margin: 5px 0; }
+        .copy-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 5px 18px; border-radius: 30px; cursor: pointer; transition: 0.2s; }
+        .copy-btn:hover { background: #00f5d4; color: #0b0e14; }
+        .qr-wrapper { text-align: center; margin: 12px 0; }
+        .qr-wrapper img { background: #fff; padding: 10px; border-radius: 16px; width: 150px; height: 150px; }
+        .telegram-instruction {
+            background: rgba(255,179,71,0.08);
+            border-left: 3px solid #ffb347;
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+        .telegram-instruction p { color: #dde4f0; font-size: 0.95rem; line-height: 1.6; }
+        .telegram-instruction strong { color: #ffb347; }
+        .tg-link {
+            display: inline-block;
+            background: #0088cc;
+            color: #fff;
+            padding: 5px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            margin-top: 5px;
+        }
+        .tg-link i { margin-right: 6px; }
+
+        @media (max-width: 600px) {
+            .container { padding: 15px; }
+            .main-header h1 { font-size: 1.8rem; }
+            .pricing-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .pricing-card { padding: 15px 8px; }
+            .price { font-size: 1.6rem; }
+            .section-header h2 { font-size: 1.2rem; }
+            .modal-box { padding: 25px 20px; }
+            .upi-value { font-size: 1.3rem; }
+        }
+        @media (max-width: 400px) {
+            .pricing-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+            .btn-buy { font-size: 0.7rem; padding: 10px 0; }
+            .apk-download-link { font-size: 0.7rem; padding: 6px 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="main-header">
+        <h1><i class="fas fa-crown" style="font-size: 1.8rem; margin-right: 10px; -webkit-text-fill-color: initial; color: #ffb347;"></i> XTFF4X</h1>
+        <p><span><i class="fas fa-bolt"></i> PREMIUM PANEL</span> | Fast & Secure</p>
+    </div>
+
+    <!-- XTFF4X - Root Panel -->
+    <div class="panel-section theme-cyan">
+        <div class="section-header">
+            <i class="fas fa-server"></i>
+            <h2>XTFF4X - Root</h2>
+            <span class="badge-root">Primary Panel</span>
+        </div>
+        <div class="pricing-grid">
+            <!-- 1 Day -->
+            <div class="pricing-card">
+                <div class="duration"><i class="far fa-clock"></i> 1 Day</div>
+                <div class="price">₹50</div>
+                <div class="badge">Trial</div>
+                <button class="btn-buy" onclick="openModal('50', '1 Day', 'XTFF4X - Root')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                <a href="https://t.me/godsunil2k_store_update" target="_blank" class="apk-download-link"><i class="fab fa-android"></i> APK पाएं</a>
+            </div>
+            <!-- 7 Days -->
+            <div class="pricing-card">
+                <div class="duration"><i class="fas fa-calendar-week"></i> 7 Days</div>
+                <div class="price">₹100</div>
+                <div class="badge">Popular</div>
+                <button class="btn-buy" onclick="openModal('100', '7 Days', 'XTFF4X - Root')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                <a href="https://t.me/godsunil2k_store_update" target="_blank" class="apk-download-link"><i class="fab fa-android"></i> APK पाएं</a>
+            </div>
+            <!-- 15 Days -->
+            <div class="pricing-card">
+                <div class="duration"><i class="fas fa-calendar-alt"></i> 15 Days</div>
+                <div class="price">₹200</div>
+                <div class="badge">Value</div>
+                <button class="btn-buy" onclick="openModal('200', '15 Days', 'XTFF4X - Root')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                <a href="https://t.me/godsunil2k_store_update" target="_blank" class="apk-download-link"><i class="fab fa-android"></i> APK पाएं</a>
+            </div>
+            <!-- 30 Days -->
+            <div class="pricing-card">
+                <div class="duration"><i class="fas fa-calendar-check"></i> 30 Days</div>
+                <div class="price">₹300</div>
+                <div class="badge">Best Deal</div>
+                <button class="btn-buy" onclick="openModal('300', '30 Days', 'XTFF4X - Root')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                <a href="https://t.me/godsunil2k_store_update" target="_blank" class="apk-download-link"><i class="fab fa-android"></i> APK पाएं</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dark X Streamer.sh - Root Panel -->
+    <div class="panel-section theme-orange">
+        <div class="section-header">
+            <i class="fas fa-skull"></i>
+            <h2>Dark X Streamer.sh - Root</h2>
+            <span class="badge-root">Streamer Special</span>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="duration"><i class="far fa-clock"></i> 1 Day</div>
+                <div class="price">₹50</div>
+                <div class="badge">Trial</div>
+                <button class="btn-buy" onclick="openModal('50', '1 Day', 'Dark X Streamer.sh - Root')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                <a href="https://t.me/godsunil2k_store_update" target="_blank" class="apk-download-link"><i class="fab fa-android"></i> APK पाएं</a>
+            </div>
+            <div class="pricing-card">
+                <div class="duration"><i class="fas fa-calendar-week"></i> 7 Days</div>
+                <div class="price">₹100</div>
+                <div class="badge">Popular</div>
+                <button class="btn-buy" onclick="openModal('100', '7 Days', 'Dark X Streamer.sh - Root')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                <a href="https://t.me/godsunil2k_store_update" target="_blank" class="apk-download-link"><i class="fab fa-android"></i> APK पाएं</a>
+            </div>
+            <div class="pricing-card">
+                <div class="duration"><i class="fas fa-calendar-alt"></i> 15 Days</div>
+                <div class="price">₹200</div>
+                <div class="badge">Value</div>
+                <button class="btn-buy" onclick="openModal('200', '15 Days', 'Dark X Streamer.sh - Root')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                <a href="https://t.me/godsunil2k_store_update" target="_blank" class="apk-download-link"><i class="fab fa-android"></i> APK पाएं</a>
+            </div>
+            <div class="pricing-card">
+                <div class="duration"><i class="fas fa-calendar-check"></i> 30 Days</div>
+                <div class="price">₹300</div>
+                <div class="badge">Best Deal</div>
+                <button class="btn-buy" onclick="openModal('300', '30 Days', 'Dark X Streamer.sh - Root')"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                <a href="https://t.me/godsunil2k_store_update" target="_blank" class="apk-download-link"><i class="fab fa-android"></i> APK पाएं</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <i class="fas fa-shield-alt" style="color: #00f5d4;"></i> 100% Secure Payment via UPI | Instant Activation after Screenshot
+    </div>
+</div>
+
+<!-- Payment Modal -->
+<div class="modal-overlay" id="paymentModal">
+    <div class="modal-box">
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+        <h2><i class="fas fa-hand-holding-usd" style="color: #00f5d4; margin-right: 10px;"></i> Complete Payment</h2>
+        <div style="margin: 8px 0 5px 0;">
+            <span class="selected-panel-name" id="panelDisplay">-</span>
+        </div>
+        <p style="color: #8a9bb5; font-size: 0.9rem;">Plan: <strong id="planDisplay" style="color:#fff;">-</strong> | Amount: <strong id="amountDisplay" style="color:#ffb347;">-</strong></p>
+
+        <div class="upi-id-box">
+            <div class="upi-label"><i class="fas fa-qrcode"></i> PAY TO UPI ID</div>
+            <div class="upi-value" id="upiDisplay">suniloraon382@upi</div>
+            <button class="copy-btn" onclick="copyUPI()"><i class="fas fa-copy"></i> Copy UPI ID</button>
+        </div>
+
+        <div class="qr-wrapper">
+            <!-- Dynamic QR code will be set via JavaScript -->
+            <img id="qrCodeImage" src="" alt="UPI QR Code">
+            <p style="color:#6a7a90; font-size:0.7rem; margin-top:5px;">Scan to Pay via GPay / PhonePe / Paytm</p>
+        </div>
+
+        <div class="telegram-instruction">
+            <p><i class="fas fa-info-circle" style="color: #ffb347; margin-right: 6px;"></i> 
+            <strong>Payment के बाद स्क्रीनशॉट लें</strong> और नीचे दिए Telegram ID पर भेजें।<br>
+            <span style="font-size:0.85rem; color:#aabbd5;">Activation 2-5 मिनट में हो जाएगी।</span></p>
+            <a href="https://t.me/GodSunil2k" target="_blank" class="tg-link"><i class="fab fa-telegram-plane"></i> @GodSunil2k पर भेजें</a>
+        </div>
+        <p style="color: #4d5c70; font-size: 0.7rem; text-align: center; margin-top: 18px;">
+            <i class="fas fa-lock"></i> Transaction सुरक्षित है | Refund नीति के लिए Telegram पर संपर्क करें
+        </p>
+    </div>
+</div>
+
+<script>
+    const upiId = "suniloraon382@upi";
+    const payeeName = "XTFF4X";
+
+    // openModal now takes amount as a number string (e.g., '50', '200')
+    function openModal(amount, plan, panelName) {
+        document.getElementById('amountDisplay').innerText = '₹' + amount;
+        document.getElementById('planDisplay').innerText = plan;
+        document.getElementById('panelDisplay').innerText = panelName;
+        document.getElementById('upiDisplay').innerText = upiId;
+
+        // Build dynamic UPI QR code with amount
+        const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR`;
+        const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`;
+        document.getElementById('qrCodeImage').src = qrCodeUrl;
+
+        document.getElementById('paymentModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('paymentModal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('paymentModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    function copyUPI() {
+        const upiText = document.getElementById('upiDisplay').innerText;
+        navigator.clipboard.writeText(upiText).then(() => {
+            const copyBtn = document.querySelector('.copy-btn');
+            const original = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => { copyBtn.innerHTML = original; }, 2000);
+        }).catch(() => {
+            // Fallback for older browsers
+            const range = document.createRange();
+            range.selectNodeContents(document.getElementById('upiDisplay'));
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            document.execCommand('copy');
+            alert('UPI ID copied!');
+        });
+    }
+</script>
+
+</body>
+</html>
